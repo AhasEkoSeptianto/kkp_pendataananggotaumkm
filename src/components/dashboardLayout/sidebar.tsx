@@ -30,7 +30,7 @@ export default function Sidebar({ Logout }){
     const router = useRouter()
     
     return (
-        <div className="bg-blue-secondary min-h-screen relative">
+        <div className="bg-blue-secondary min-h-screen relative shadow-lg">
             <div className='py-10 flex flex-col items-center justify-center'>
                 <div className='p-4 bg-gray-600 rounded-full'>
                     <RiAdminFill className='text-5xl text-white' />
@@ -45,7 +45,9 @@ export default function Sidebar({ Logout }){
                     <Link href={item?.link} key={idx}>
                         <div className={`py-3 px-5 cursor-pointer flex items-center space-x-4 ${router.pathname === item?.link ? 'bg-blue-darkSecondary' : 'hover:bg-blue-darkSecondary'}`}>
                             {item?.icon}
-                            <p className='text-white'>{item?.label}</p>
+                            <div className='flex items-center justify-center'>
+                                <p className='text-white my-auto'>{item?.label}</p>
+                            </div>
                         </div>
                     </Link>
                 ))}
@@ -54,7 +56,7 @@ export default function Sidebar({ Logout }){
             <div className='absolute bottom-0 w-full'>
                 <div className={`py-3 px-5 mx-0.5 cursor-pointer flex items-center justify-center space-x-4 border border-darkSecondary`} onClick={Logout}>
                     <BiLogOut className='text-white text-xl' />
-                    <p className='text-white'>Logout</p>
+                    <p className='text-white my-auto'>Logout</p>
                 </div>
             </div>
 
@@ -68,7 +70,7 @@ export function SidebarMobile(){
 
     return (
         <Fragment>
-            <div className="absolute w-screen h-screen bg-gray-800 bg-opacity-60 flex flex-col items-center justify-center">
+            <div className="absolute w-screen h-screen bg-gray-800 bg-opacity-80 flex flex-col items-center justify-center" style={{ zIndex: 1400 }}>
                 {ListMenu?.map((item, idx) => (
                     <Link href={item?.link} key={idx}>
                         <div className={`py-3 px-5 cursor-pointer flex items-center space-x-4`}>

@@ -28,12 +28,12 @@ export default function DashboardLayout(props:any){
             </div>
 
             {isOpenMobileMenu && (
-                <div className='absolute top-0 left-0 p-5 z-30 lg:hidden'>
-                    <BiLogOutCircle className="text-red-600" onClick={Logout} size={40} />
+                <div className='absolute top-0 left-0 p-5 lg:hidden' style={{ zIndex: 1500 }}>
+                    <BiLogOutCircle color='#DC143C' onClick={Logout} size={40}  />
                 </div>
             )}
 
-            <div className="absolute top-0 right-0 p-3 z-30 lg:hidden">
+            <div className="absolute top-0 right-0 p-3 lg:hidden" style={{ zIndex: 1500 }}>
                 <Hamburger toggled={isOpenMobileMenu} toggle={setOpenMobileMenu} />
             </div>
             
