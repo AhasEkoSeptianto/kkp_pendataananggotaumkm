@@ -1,0 +1,11 @@
+{
+    "subTabMenu": {
+        "listOfClient": "List Of Client",
+        "treeOfClient": "Tree Of Client",
+        "listOfMitra": "List Of Mitra",
+        "treeOfMitra": "Tree Of Mitra"
+    },
+    "subTitle": {
+        "listOfClient": "information about list of client"
+    }
+}

@@ -1,0 +1,57 @@
+{
+    "ProfileInformation": {
+        "personalData": "Personal Data",
+        "contact": "Contact",
+        "job":"Job",
+        "riches":"Riches",
+        "bank": "Bank",
+        "document":"Document"
+    },
+    "personalInformation":{
+        "namaLengkap": "Full Name",
+        "noTelpHome":"No. Home Phone",
+        "address":"Address",
+        "date": "Place and date of birth",
+        "email": "Email",
+        "IdentityType":"Identity type KTP/SIM/PASSPOR",
+        "noNpwp": "No NPWP",
+        "gender":"Gender",
+        "MaritalStatus": "Marital Status",
+        "husband/wifeName": "Husband/Wife Name",
+        "motherName": "Mother Name",
+        "phoneNumber":"No. Handphone",
+        "homeOwnershipStatus": "Home Ownership Status",
+        "purposeOfAccountOpening":"Purpose of Account Opening",
+        "ivestmentExperience": "Investment Experience",
+        "maininvestment": "Main investment",
+        "questionFamlyUser": "Do you have family members who work in BAPPEBTI / Futures Exchange / Futures Clearing?",
+        "questionPailit": "Have you been declared bankrupt by the Court?",
+        "country": "Country",
+        "province": "Province",
+        "city": "Districk",
+        "codePos":"Code Pos",
+
+        "relationshipWithYou":"Relationship With You",
+
+        "job":"Job",
+        "officeAddress": "Office Address",
+        "companyName": "Company Name",
+        "companyPhone": "Company Phone",
+        "position": "Position",
+        "businessfields": "Business fields",
+        "lengthOfWork": "Length Of Work",
+        "lengthofWorkinPreviousPlace": "Length of Work in Previous Place",
+
+        "annualIncome": "Annual Income",
+        "bankDeposit": "BANK Deposit",
+        "assetLocation": "Asset Location",
+        "Other": "Other",
+        "NJOPValue": "NJOP Value",
+        "amount": "Amount",
+
+        "bankName": "Bank Name",
+        "bankAccountName": "Bank Account Name",
+        "bankAccNumber": "Bank Account Number",
+        "savingsType": "Savings Type"
+    }
+}

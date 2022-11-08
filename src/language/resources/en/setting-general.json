@@ -1,0 +1,22 @@
+{
+  "menu": {
+    "general": "Time Zone And Balance Req.",
+    "agama": "Religion",
+    "pekerjaan": "Type Of Job",
+    "persetujuan": "Approval Status",
+    "dokumen": "Client Document",
+    "perjanjian": "Agreement Rules"
+  },
+  "sub_pekerjaan": "Update Job Variable For CLient",
+  "sub_agreement": "Update Your Agreements Information",
+  "title_agreement": "Agreement",
+  "add_new_job": "Add New Job",
+  "placeholde_new_job": "Write New Job...",
+  "add_new_approval": "Add Approval Variable",
+  "add_new_doc": "Add Document Variable",
+  "approve_placeholder": "Write New Approval...",
+  "subSubTab":{
+    "AggrementRule": "Agreement Rules",
+    "TypeAggrementRule": "Type Aggrement Rules"
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "subMenu": {
+        "listadmin": "daftar admin",
+        "roleAdmin": "jabatan admin"
+    },
+    "button": {
+        "tambahAdmin": "tambah admin",
+        "tambahRoleAdmin": "tambah jabatan admin"
+    }
+}

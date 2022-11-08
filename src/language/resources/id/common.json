@@ -1,0 +1,90 @@
+{
+  "type": "id",
+  "change": "en",
+  "flasIcon": "https://cdn-icons-png.flaticon.com/512/323/323372.png",
+  "language": "Indonesia",
+  "menu": {
+    "setting": "Pengaturan",
+    "dashboard": "Beranda",
+    "user": "Pengguna",
+    "funding": "Funding",
+    "report": "Laporan"
+  },
+  "subMenu": {
+    "set_grup": "Pengaturan Grup",
+    "set_schemaRebate": "Skema Rebate",
+    "set_exchange": "Pengaturan Pertukaran",
+    "set_branc": "Cabang",
+    "set_bank": "Bank",
+    "set_managementRight": "Hak Pengelolaan",
+    "set_temEmail": "Template Email",
+    "set_Prfofile": "Profil Perusahaan",
+    "set_generalSetting": "Pengaturan Umum",
+    "set_companyProfile": "Profile Perusahaan",
+    "set_client": "Klien",
+    "set_metaAccount": "Akun MetaTrader"
+  },
+  "search": "Cari...",
+  "button": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  },
+  "textPagination": {
+    "show": "Memperlihatkan",
+    "to": "Sampai",
+    "from": "Dari"
+  },
+  "tableHeaders": {
+    "name": "Nama",
+    "namaLengkap": "Nama Lengkap",
+    "noTelpHome":"No. Telp Rumah",
+    "address":"Alamat",
+    "date": "Tempat Tanggal Lahir",
+    "email": "Email",
+    "IdentityType":"Jenis Identitas KTP/SIM/PASSPOR",
+    "noNpwp": "No NPWP",
+    "gender":"Jenis Kelamin",
+    "MaritalStatus": "Status Pernikahan",
+    "husband/wifeName": "Nama Suami/Istri",
+    "motherName": "Nama Ibu Kandung",
+    "phoneNumber":"No. Handphone",
+    "homeOwnershipStatus": "Status Kepemilikan Rumah",
+    "purposeOfAccountOpening":"Tujuan Pembukaan Rekening",
+    "ivestmentExperience": "Pengalaman Investasi",
+    "maininvestment": "Investasi Utama",
+    "questionFamlyUser": "Apakah Anda memiliki anggota keluarga yang bekerja di BAPPEBTI / Bursa Berjangka / Kliring Berjangka?",
+    "questionPailit": "Apakah Anda telah dinyatakan pailit oleh Pengadilan?",
+    "country": "Negara",
+    "province": "Provinsi",
+    "city": "Kota/Kabupaten",
+    "codePos":"Kode Pos",
+
+    "relationshipWithYou":"Hubungan Dengan Anda",
+
+    "job":"Pekerjaan",
+    "officeAddress": "Office Address",
+    "companyName": "Nama Perusahaan",
+    "companyPhone": "Nomor Perusahaan",
+    "position": "Jabatan",
+    "businessfields": "Bidang Usaha",
+    "lengthOfWork": "Lama Bekerja",
+    "lengthofWorkinPreviousPlace": "Lama Bekerja Ditempat Sebelumnya",
+
+    "annualIncome": "Penghasilan Pertahun",
+    "bankDeposit": "Deposit Bank",
+    "assetLocation": "Lokasi Asset",
+    "Other": "Lainnya",
+    "NJOPValue": "Nilai NJOP",
+    "amount": "Jumlah",
+
+    "bankName": "Nama Bank",
+    "bankAccountName": "Nama Akun Bank",
+    "bankAccNumber": "Nomor Akun Bank",
+    "savingsType": "Jenis Tabungan",
+
+    "groupType": "Type Group",
+    "branch":"Cabang",
+    "registerAt": "Mendaftar Pada"
+  }
+}

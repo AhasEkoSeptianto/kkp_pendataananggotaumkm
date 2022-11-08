@@ -1,0 +1,21 @@
+{
+  "menu": {
+    "general": "Zona Waktu Dan Balance Req.",
+    "agama": "Agama",
+    "pekerjaan": "Jenis Pekerjaan",
+    "persetujuan": "Status Persetujuan",
+    "dokumen": "Dokumen Klien",
+    "perjanjian": "Alur Perjanjian"
+  },
+  "sub_pekerjaan": "Update Variabel Pekerjaan Untuk Klien",
+  "sub_agreement": "Update Informasi Persetujuan",
+  "title_agreement": "Persetujuan",
+  "add_new_job": "Tambah Pekerjaan Baru",
+  "placeholde_new_job": "Tulis Pekerjaan...",
+  "add_new_approval": "Tambah Variabel Persetujuan",
+  "add_new_doc": "Tambah Variabel Dokumen",
+  "subSubTab":{
+    "AggrementRule": "Alur Perjanjian",
+    "TypeAggrementRule": "Type Alur Perjanjian"
+  }
+}

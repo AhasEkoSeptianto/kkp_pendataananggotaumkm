@@ -1,0 +1,18 @@
+::-webkit-scrollbar {
+  height: 4px;
+  width: 6px;
+  background: #9ca3af;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5c6775;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #9ca3af;
+}
+.scrollBarr {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: thin; /* Firefox */
+}

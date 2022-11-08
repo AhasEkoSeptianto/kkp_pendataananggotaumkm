@@ -1,0 +1,10 @@
+{
+    "subMenu": {
+        "listadmin": "List Of Admin",
+        "roleAdmin": "Role Admin"
+    },
+    "button": {
+        "tambahAdmin": "Add New Admin",
+        "tambahRoleAdmin": "Add Role Admin"
+    }
+}

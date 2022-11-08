@@ -1,0 +1,80 @@
+{
+    "titleSubmenu": {
+      "susunanPerusahaan": "Company Structure",
+      "kontrakPerusahaan": "Company Contract",
+      "pkp": "Licensing/Contracts/Problem Solving",
+      "companyProfile":"Company Profile"
+    },
+    "subTitleSubMenu": {
+      "informationAbout": "Information About"
+    },
+    "submenu": {
+      "shareholders": "Shareholders",
+      "wakilPialang": "Broker Representative",
+
+      "nomorTelephone": "Company Phone Number",
+      "pengurusPerusahaan": "Company Manager",
+      "email": "Company Email",
+      "website": "Company Website",
+      "faksimili": "Company Faksimili",
+      "lisence": "Company Lisence",
+      "problem": "Problem Solving",
+      "contract": "Type Of Contract",
+      "manager": "Company Manager",
+      "modal": "Company Capital",
+      "bank": "Company Bank",
+      "perizinanPerusahaan": "Company Licence",
+      "jenisKontrak": "Type Of Contract", 
+      "penyelesaian": "Problem Solving"
+    },
+
+    "button": {
+      "tambahPengurusPerusahaan": "Add New Company Manager",
+      "tambahPemegangSaham": "Add Shareholder",
+      "tambahpenyelesaian": "Add Problem Solving",
+      "tambahkontrak": "Add Contract",
+      "tambahperizinan": "Add License",
+      "tambahTelephone": "Add New Company Phone Number",
+      "tambahEmail": "Add New Company Email",
+      "tambahWebsite": "Add New Company Website",
+      "tambahFaksimili": "Add New Company Faksimili",
+      "wakilPialang": "Add Company Brokerage Representative",
+      "tambbahmodal": "Add Company Capital",
+      "tambahbank": "Add bank Company"
+    },
+    "formCompProfile": {
+      "country": "Country",
+      "province": "Province",
+      "regency": "Regency",
+      "districk": "Disctrik",
+      "village": "Village",
+      "address": "Address"
+    },
+    "tableHeaders": {
+      "name": "Name",
+      "numberOfShares": "Number Of Shares",
+      "address": "Address",
+      "position": "Position",
+      "phoneNumber": "Phone Number",
+      "type": "Type",
+      "amount": "Amount",
+      "lisence": "Lisence",
+      "licenseNumber": "License Number",
+      "contract": "Contract",
+      "typeCurrentcy": "Type Currentcy",
+      "bankName": "Bank Name",
+      "branch": "Branch",
+      "accountNumber": "Account Number",
+      "separated": "Separated",
+      "registry": "registered",
+      "appointed": "Appointed",
+      "signature": "Signature",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "history": "History",
+      "action": "Action"
+    }
+
+
+  }
+  

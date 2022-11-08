@@ -1,0 +1,11 @@
+{
+    "subTabMenu": {
+        "listOfClient": "Daftar klien",
+        "treeOfClient": "Pohon Klien",
+        "listOfMitra": "Daftar Mitra",
+        "treeOfMitra": "Pohon Mitra"
+    },
+    "subTitle": {
+        "listOfClient": "informasi tentang daftar klien"
+    }
+}

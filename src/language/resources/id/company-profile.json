@@ -1,0 +1,78 @@
+{
+    "titleSubmenu": {
+      "susunanPerusahaan": "Susunan Perusahaan",
+      "kontrakPerusahaan": "Kontrak Perusahaan",
+      "pkp": "Perizinan/Kontrak/Pny Mslh",
+      "companyProfile": "Profil Perusahaan"
+    },
+    "subTitleSubMenu": {
+      "informationAbout": "Informasi Tentang"
+    },
+    "submenu": {
+      "shareholders": "Pemegang Saham",
+      "wakilPialang": "Wakil Pialang Berjangka",
+
+      "nomorTelephone": "Nomor Telephone Perusahaan",
+      "pengurusPerusahaan": "Pengurus Perusahaan",
+      "email": "Email Perusahaan",
+      "website": "Website Perusahaan",
+      "faksimili": "Faksimili Perusahaan",
+      "lisence": "Perizinan Perusahaan",
+      "problem": "Penyelesaian Masalah",
+      "contract": "Jenis Kontrak Berjangka",
+      "manager": "Pengurus Perusahaan",
+      "modal": "Modal Perusahaan",
+      "bank": "Bank Perusahaan",
+      "perizinanPerusahaan": "Perizinan Perusahaan",
+      "jenisKontrak": "Jenis Kontrak Berjangka",
+      "penyelesaian": "Sarana Penyelesaian Masalah"
+    },
+
+    "button": {
+      "tambahPengurusPerusahaan": "Tambah Pengurus Perusahaan",
+      "tambahPemegangSaham": "Tambah Pemegang Saham",
+      "tambahpenyelesaian": "Tambah Penyelesaian Masalah",
+      "tambahkontrak": "Tambah Kontrak",
+      "tambahperizinan": "Tambah Perizinan",
+      "tambahTelephone": "Tambah Nomor Telephone Perusahaan",
+      "tambahEmail": "Tambah Email Perusahaan",
+      "tambahWebsite": "Tambah Website Perusahaan",
+      "tambahFaksimili": "Tambah Faksimili Perusahaan",
+      "wakilPialang": "Tambah Wakil Pialang Perusahaan",
+      "tambbahmodal": "Tambah Modal Perusahaan",
+      "tambahbank": "Tambah Bank Perusahaan"
+    },
+    "formCompProfile": {
+      "country": "Negara",
+      "province": "Provinsi",
+      "regency": "Kabupaten",
+      "districk": "Daerah",
+      "village": "Desa",
+      "address": "Alamat"
+    },
+    "tableHeaders": {
+      "name": "Nama",
+      "numberOfShares": "Jumlah Saham",
+      "address": "Alamat",
+      "position": "Jabatan",
+      "phoneNumber": "Nomor Telephone",
+      "type": "Jenis",
+      "amount": "Jumlah",
+      "lisence": "Perizinan",
+      "licenseNumber": "No Izin",
+      "contract": "Kontrak",
+      "typeCurrentcy": "Jenis Mata Uang",
+      "bankName": "Nama Bank",
+      "branch": "Cabang",
+      "accountNumber": "Nomor Rekening",
+      "separated": "Terpisah",
+      "registry": "Terdaftar",
+      "appointed": "Ditunjuk",
+      "signature": "Tanda Tangan",
+      "createdAt": "Dibuat Pada",
+      "updatedAt": "Diperbarui pada",
+      "history": "Sejarah",
+      "action": "Aksi"
+    }
+  }
+  
