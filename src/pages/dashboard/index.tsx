@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 export default function DashboardDefaultPage(){
     return (
         <DashboardLayout>
-            <p>tes</p>
+            <p>dashboard pages</p>
         </DashboardLayout>
     )
 }
