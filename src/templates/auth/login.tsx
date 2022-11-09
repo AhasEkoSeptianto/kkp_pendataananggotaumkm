@@ -25,7 +25,6 @@ export default function LoginDefaultPage(){
                 window.location.href= '/dashboard'
             })
             .catch(err => {
-                console.log(err)
                 toast.error(err?.response?.data?.msg, { position: toast.POSITION.TOP_CENTER })
             }).finally(() => {
                 setLoadingSubmit(false)

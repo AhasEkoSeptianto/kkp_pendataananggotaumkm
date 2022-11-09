@@ -37,7 +37,8 @@ import appWithI18n from 'next-translate/appWithI18n'
 import { useRouter } from 'next/router'
 import 'moment-timezone';
 import { NextUIProvider } from '@nextui-org/react';
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 /* Configuration Start */
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay])
 const useScreen = createBreakpoint({ ...breakScreen } as {})
@@ -85,6 +86,7 @@ const MainApp = ({ Component, pageProps }) => {
 
   return (
     <>
+      <ToastContainer />
       <PersistGate persistor={persistor} loading={<div></div>}>
         <Head>
           {BRAND_NAME}
