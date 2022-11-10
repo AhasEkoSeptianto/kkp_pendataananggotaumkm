@@ -1,41 +1,57 @@
 import DashboardLayout from "@base/src/components/dashboardLayout";
 import { Button, Input, Loading } from "@nextui-org/react";
-import { AiOutlinePlus, AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import { AiOutlinePlus, AiFillDelete, AiFillEdit, AiOutlineQrcode } from 'react-icons/ai'
 import { DatePicker, Drawer, Modal, Popconfirm, Select, Table } from 'antd';
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { CgArrowsExchangeAlt } from 'react-icons/cg'
 import { FcSearch } from 'react-icons/fc'
 import { IoSaveSharp } from 'react-icons/io5'
 import axios from "axios";
 import { toast } from "react-toastify";
+import moment from "moment";
+import {QRCodeCanvas} from 'qrcode.react';
 
 export default function DefaultAnggotaPage(){
 
     const [ drawer, setDrawer ] = useState(false)
-
+    const [ dataToEdit, setDataToEdit ] = useState(null)
     const [ listToko, setListToko ] = useState([])
     const [ listAnggota, setListAnggota ] = useState([])
     const [ loadingFetchAnggota, setLoadingFetchAnggota ] = useState(true)
+    const [ paramsGet, setParamsGet ] = useState({
+        page: 1,
+        limit: 10,
+        search: '',
+        toko: ''
+    })
     useEffect(() => {
+        RefreshDataAnggota()
+    },[])
+    useEffect(() => {
+        RefreshDataAnggota()
+    },[paramsGet])
+    const RefreshDataAnggota = () => {
+        setLoadingFetchAnggota(true)
+        axios.get('/api/anggota', { params: paramsGet })
+            .then(res => {
+                setListAnggota(res?.data?.data)
+            })
+            .finally(() => {
+                setLoadingFetchAnggota(false)
+            })
+
         axios.get('/api/toko')
             .then(res => {
                 setListToko(res?.data?.data)
             })
         
-        axios.get('/api/anggota')
-            .then(res => {
-                setListAnggota(res?.data?.data)
-            }).finally(() => {
-                setLoadingFetchAnggota(false)
-            })
-    },[])
-
-    const RefreshDataAnggota = () => {
-        axios.get('/api/anggota')
-            .then(res => {
-                setListAnggota(res?.data?.data)
-            })
     }
+
+    useEffect(() => {
+        if (!drawer){
+            setDataToEdit(null)
+        }
+    },[drawer])
     
 
     const columnsTable = [
@@ -84,29 +100,46 @@ export default function DefaultAnggotaPage(){
                             toast.error(err?.response?.data?.msg, { position: toast.POSITION.TOP_CENTER })
                         })
                 }
+
+                const HandleEditAnggota = () => {
+                    setDataToEdit(record)
+                    setDrawer(true)
+                }   
                 
                 return (
                     <div className="flex items-center space-x-2">
-                        <AiFillEdit className="text-blue-500 text-lg cursor-pointer" />
+                        <AiFillEdit className="text-blue-500 text-lg cursor-pointer" onClick={HandleEditAnggota} />
                         <Popconfirm placement='topLeft' title='apakah anda yakin?' onConfirm={HandleDeleteAnggota} okText='Ya' cancelText='Batal'>
                             <AiFillDelete className="text-red-500 text-lg cursor-pointer" />
                         </Popconfirm>
+                        <RenderQRCode record={record} />
                     </div>
                 )
             }
         }
     ]
+    const HandleFilter = (key,value) => {
+        setParamsGet({ ...paramsGet, [key]: value })
+    }
 
     return (
         <DashboardLayout>
             <Drawer 
-                title='Tambah Anggota'
+                title='Tambah/Ubah Anggota'
                 placement='right'
                 onClose={() => setDrawer(false)}
                 open={drawer}
             >
-                <DrawerAddAnggota mutate={RefreshDataAnggota} listToko={listToko} open={drawer} onClose={() => setDrawer(false)} />
+                <DrawerAddAnggota 
+                    defaultData={dataToEdit}
+                    mutate={RefreshDataAnggota} 
+                    listToko={listToko} 
+                    open={drawer} 
+                    onClose={() => setDrawer(false)} 
+                />
             </Drawer>
+            
+            
 
             <div className="p-5 z-0">
                 <p className="text-2xl font-semibold">Daftar Anggota</p>
@@ -117,8 +150,9 @@ export default function DefaultAnggotaPage(){
                             <Input 
                                 placeholder="cari nama/email.."
                                 contentRight={<FcSearch />}
+                                onChange={e => HandleFilter('search', e.target.value)}
                             />
-                            <Select placeholder='toko' allowClear className="w-40">
+                            <Select placeholder='toko' allowClear onClear={() => HandleFilter('toko', '')} className="w-40" onChange={val => HandleFilter('toko', val)}>
                                 {listToko?.map(item => (
                                     <Select.Option value={item}>{item}</Select.Option>
                                 ))}
@@ -134,6 +168,7 @@ export default function DefaultAnggotaPage(){
                         loading={loadingFetchAnggota}
                         scroll={{ x: 500 }}
                         size='middle'
+                        onChange={(e:any) => console.log(e)}
                         pagination={{
                             showSizeChanger: true,
                             showTotal: (total, range) =>
@@ -147,13 +182,13 @@ export default function DefaultAnggotaPage(){
     )
 }
 
-const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
+const DrawerAddAnggota = ({ open, listToko, onClose, mutate, defaultData }) => {
     const initialForm = {
         nama: '',
         email: '',
         noTelp: '',
         alamat: '',
-        tanggal_lahir: '',
+        tanggal_lahir: moment('1980-01-01').format('YYYY-MM-DD'),
         toko: ''
     }
     const [ form, setForm ] = useState({
@@ -164,6 +199,7 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
     const HandleChangeToko = (val) => {
         if (val === 'tambah'){
             setTambahToko(true)
+            setForm({ ...form, toko: '' })
         }else{
             setForm({ ...form, toko: val })
         }
@@ -172,22 +208,47 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
         if (!open){
             setTambahToko(false)
             setForm(initialForm)
+        }else{
+            if (defaultData){
+                setForm({ ...defaultData })
+            }
         }
     },[open])
 
     const SubmitForm = async e => {
         e.preventDefault()
         setLoadingSubmit(true)
+        if (defaultData){
+            UpdateData()
+        }else{
+            CreateData()
+        }
+    }
+
+    const UpdateData = async () => {
+        await axios.put('/api/anggota', form, { params: { uniq_id: defaultData?._id } })
+        .then(res => {
+            toast.success(res?.data?.msg, { position: toast.POSITION.TOP_CENTER })
+            mutate()
+            onClose()
+        }).catch(err => {
+            toast.error(err?.data?.msg, { position: toast.POSITION.TOP_CENTER })
+        }).finally(() => {
+            setLoadingSubmit(false)
+        })
+    }
+
+    const CreateData = async () => {
         await axios.post('/api/anggota', form)
-            .then(res => {
-                toast.success(res?.data?.msg, { position: toast.POSITION.TOP_CENTER })
-                mutate()
-                onClose()
-            }).catch(err => {
-                toast.error(err?.data?.msg, { position: toast.POSITION.TOP_CENTER })
-            }).finally(() => {
-                setLoadingSubmit(false)
-            })
+        .then(res => {
+            toast.success(res?.data?.msg, { position: toast.POSITION.TOP_CENTER })
+            mutate()
+            onClose()
+        }).catch(err => {
+            toast.error(err?.data?.msg, { position: toast.POSITION.TOP_CENTER })
+        }).finally(() => {
+            setLoadingSubmit(false)
+        })
     }
 
     return (
@@ -198,6 +259,7 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
                 placeholder="masukan nama anggota" 
                 required
                 onChange={({target}) => setForm({ ...form, nama: target.value })}
+                value={form.nama}
             />
             <Input 
                 label='Email' 
@@ -205,6 +267,7 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
                 placeholder="masukan email anggota" 
                 required
                 onChange={({target}) => setForm({ ...form, email: target.value })}
+                value={form.email}
             />
             <Input 
                 label='No Telp' 
@@ -212,6 +275,7 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
                 placeholder="masukan no telp anggota" 
                 required
                 onChange={({target}) => setForm({ ...form, noTelp: target.value })}
+                value={form.noTelp}
             />
             <Input 
                 label='Alamat' 
@@ -219,12 +283,15 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
                 placeholder="masukan alamat tempat tinggal" 
                 required
                 onChange={({target}) => setForm({ ...form, alamat: target.value })}
+                value={form.alamat}
             />
             <div className='my-1'>
                 <p>Tanggal Lahir</p>
                 <DatePicker 
                     className="w-full"
                     onChange={(date_moment, date_string ) => setForm({ ...form, tanggal_lahir: date_string })}
+                    format="YYYY-MM-DD"
+                    value={moment(form.tanggal_lahir, 'YYYY-MM-DD')}
                 />
             </div>
             {isTambahToko ? (
@@ -234,11 +301,12 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
                     placeholder="masukan nama toko"
                     required
                     onChange={({target}) => setForm({ ...form, toko: target.value })}
+                    value={form.toko}
                 />
             ) : (
                 <div className="my-1">
                     <p>Toko</p>
-                    <Select className="w-full" clearIcon  placeholder='Pilih Toko Anggota' onChange={HandleChangeToko}>
+                    <Select className="w-full" clearIcon  placeholder='Pilih Toko Anggota' onChange={HandleChangeToko} value={form.toko}>
                         {listToko?.map((item) => (
                             <Select.Option value={item}>{item}</Select.Option>
                         ))}
@@ -253,5 +321,42 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate }) => {
                 </Button>
             </div>
         </form>
+    )
+}
+
+const RenderQRCode = ({ record }) => {
+
+    const [ openModal, setOpenModal ] = useState(false)
+    let link = window.location.origin + '/anggota/' + record?._id
+    const downloadQR = () => {
+        const canvas:any = document.getElementById(`QR-Code-${record?._id}`);
+        const pngUrl = canvas.toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = `QR-Code_anggota_umkm_paguyuban_${record?.nama}.png`;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      };
+    return (
+        <Fragment>
+            <Modal
+                open={openModal}
+                onCancel={() => setOpenModal(false)}
+                okButtonProps={{ style: { display: 'none' } }}
+                cancelButtonProps={{ style: { display: 'none' } }}
+            >
+                <p className="text-center font-semibold text-lg">QR-Code</p>
+                <div className="flex flex-col items-center justify-center w-full my-10">
+                    <p>{link}</p>
+                    <QRCodeCanvas id={`QR-Code-${record?._id}`} value={link} size={300}  />
+                    <div className="mt-5">
+                        <Button onClick={downloadQR}>Download</Button>
+                    </div>
+                </div>
+            </Modal>
+            <AiOutlineQrcode  onClick={() => setOpenModal(true)} className="text-green-500 text-lg cursor-pointer" />
+        </Fragment>
     )
 }

@@ -34,7 +34,7 @@ export default function DashboardLayout(props:any){
             )}
 
             <div className="absolute top-0 right-0 p-3 lg:hidden" style={{ zIndex: 1500 }}>
-                <Hamburger toggled={isOpenMobileMenu} toggle={setOpenMobileMenu} />
+                <Hamburger color={isOpenMobileMenu ? 'white' : 'black'} toggled={isOpenMobileMenu} toggle={setOpenMobileMenu} />
             </div>
             
             {isOpenMobileMenu && (
