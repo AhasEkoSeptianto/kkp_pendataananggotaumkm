@@ -10,7 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import moment, { Moment } from "moment";
 import {QRCodeCanvas} from 'qrcode.react';
-import { PickerProps } from "antd/lib/calendar/generateCalendar";
+import { CSVLink, CSVDownload } from "react-csv";
 
 export default function DefaultAnggotaPage(){
 
@@ -87,6 +87,16 @@ export default function DefaultAnggotaPage(){
             title: 'Toko'
         },
         {
+            key: '_created',
+            dataIndex: '_created',
+            title: 'Daftar Pada',
+            render: (text, record) => {
+                return (
+                    <p className="mt-5">{moment(record?.created_at).format('YYYY-MM-DD')}</p>
+                )
+            }
+        },
+        {
             key: '_action',
             dataIndex: '_action',
             title: 'Aksi',
@@ -123,6 +133,38 @@ export default function DefaultAnggotaPage(){
         setParamsGet({ ...paramsGet, [key]: value })
     }
 
+      const [ listToExport, setListToExport ] = useState([])
+      const [loadingExport, setLoadingExport] = useState(false)
+      const getAllAnggota = async (event, done) => {
+        setLoadingExport(true)
+        await axios.get('/api/anggota', { params: {
+            page: 1,
+            limit: 1000000,
+            search: '',
+            toko: ''
+        }})
+            .then(res => {
+                let resData = res?.data?.data
+                let makeFormCsv = [
+                    ['_id', 'Nama', 'Email', 'No Telp', 'Alamat', 'Tanggal Lahir', 'Toko']
+                ]
+    
+                resData?.forEach(item => {
+                    makeFormCsv.push([item?._id, item?.nama, item?.email, item?.noTelp, item?.alamat, item?.tanggal_lahir, item?.toko])
+                })
+
+                setListToExport(makeFormCsv)
+                done(true)
+            })
+            .catch(err => {
+                done(false)
+            })
+            .finally(() => {
+                setLoadingExport(false)
+            })
+
+      }
+
     return (
         <DashboardLayout>
             <Drawer 
@@ -133,31 +175,46 @@ export default function DefaultAnggotaPage(){
             >
                 <DrawerAddAnggota 
                     defaultData={dataToEdit}
-                    mutate={RefreshDataAnggota} 
+                    mutate={RefreshDataAnggota}
                     listToko={listToko} 
                     open={drawer} 
                     onClose={() => setDrawer(false)} 
                 />
             </Drawer>
             
-            
 
             <div className="p-5 z-0">
                 <p className="text-2xl font-semibold">Daftar Anggota</p>
-                <div className="flex items-center justify-between my-5">
+                <div className="lg:flex items-center justify-between my-5">
                     <div>
                         <p>filter</p>
-                        <div className="space-x-3 flex items-center">
-                            <Input 
-                                placeholder="cari nama/email.."
-                                contentRight={<FcSearch />}
-                                onChange={e => HandleFilter('search', e.target.value)}
-                            />
-                            <Select placeholder='toko' allowClear onClear={() => HandleFilter('toko', '')} className="w-40" onChange={val => HandleFilter('toko', val)}>
-                                {listToko?.map(item => (
-                                    <Select.Option value={item}>{item}</Select.Option>
-                                ))}
-                            </Select>
+                        <div className="space-x-3 lg:flex items-center">
+                            <div className="flex items-center space-x-3">
+                                <Input 
+                                    placeholder="cari nama/email.."
+                                    contentRight={<FcSearch />}
+                                    onChange={e => HandleFilter('search', e.target.value)}
+                                />
+                                <Select placeholder='toko' allowClear onClear={() => HandleFilter('toko', '')} className="w-40" onChange={val => HandleFilter('toko', val)}>
+                                    {listToko?.map(item => (
+                                        <Select.Option value={item}>{item}</Select.Option>
+                                    ))}
+                                </Select>
+                            </div>
+
+                                        
+                            <div className="my-2">
+                                <CSVLink 
+                                    data={listToExport}
+                                    asyncOnClick={true}
+                                    filename={"daftar_anggota_umkm_paguyuban.csv"}
+                                    onClick={getAllAnggota}
+                                    className='bg-blue-500 p-2 rounded text-white text-sm '
+                                >
+                                    {loadingExport ? <Loading color='white' className="px-10" size="xs" /> : 'Export CSV' }
+                                </CSVLink>
+                            </div>
+                            
                         </div>
                     </div>
                     <Button  onClick={() => setDrawer(true)} icon={<AiOutlinePlus />}>Tambah Anggota</Button>
@@ -357,7 +414,7 @@ const RenderQRCode = ({ record }) => {
             >
                 <p className="text-center font-semibold text-lg">QR-Code</p>
                 <div className="flex flex-col items-center justify-center w-full my-10">
-                    <p>{link}</p>
+                    <p className="text-center">{link}</p>
                     <QRCodeCanvas id={`QR-Code-${record?._id}`} value={link} size={300}  />
                     <div className="mt-5">
                         <Button onClick={downloadQR}>Download</Button>

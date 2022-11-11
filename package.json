@@ -25,6 +25,7 @@
     }
   },
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ckeditor/ckeditor5-core": "^31.0.0",
     "@ckeditor/ckeditor5-image": "^31.0.0",
@@ -80,7 +81,9 @@
     "postcss-custom-properties-fallback": "^1.0.1",
     "qrcode.react": "^3.1.0",
     "react": "17.0.2",
+    "react-calendar": "^4.0.0",
     "react-content-loader": "^6.0.3",
+    "react-csv": "^2.2.2",
     "react-dom": "17.0.2",
     "react-ga": "^3.3.0",
     "react-icons": "^4.4.0",

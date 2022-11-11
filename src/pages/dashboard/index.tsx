@@ -6,6 +6,9 @@ import { FiChevronsRight } from 'react-icons/fi'
 import { FaUsers } from 'react-icons/fa'
 import { BsShop } from 'react-icons/bs'
 import { Image } from 'antd'
+import { Area } from '@ant-design/plots';
+import moment from 'moment'
+import Calendar from 'react-calendar';
 
 export default function DashboardDefaultPage(){
 
@@ -25,7 +28,7 @@ export default function DashboardDefaultPage(){
     return (
         <DashboardLayout>
             <div className='p-10'>
-                <div className='grid grid-cols-3 gap-5 '>
+                <div className='space-y-2 lg:space-y-0 lg:grid grid-cols-3 gap-5 '>
                     <div className='border shadow rounded p-5 relative'>
                         <p className='font-semibold'>Total {summaryData?.totalAnggota} Anggota</p>
                         <FaUsers className='text-4xl' />
@@ -64,10 +67,92 @@ export default function DashboardDefaultPage(){
                             </Link>
                         </div>
                     </div>
-                    
                 </div>
+
+                <div className='lg:grid grid-cols-12 my-10 p-5 gap-5'>
+                    <div className='col-span-8'>
+                        <GrafikShow />
+                    </div>
+                    <div className='col-span-4'>
+                        <div className='m-10'>
+                            <Calendar onChange={() => {}} />
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </DashboardLayout>
+    )
+}
+
+const GrafikShow = () => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        asyncFetch();
+    }, []);
+    
+
+    const asyncFetch = () => {
+        axios.get('/api/grafikAnggota')
+            .then(res => {
+                let anggotaThisYears = res?.data?.data
+
+                let monthList = [ 
+                    moment().subtract(11, 'months')?.format('MMMM') , 
+                    moment().subtract(10, 'months')?.format('MMMM') , 
+                    moment().subtract(9, 'months')?.format('MMMM') , 
+                    moment().subtract(8, 'months')?.format('MMMM') , 
+                    moment().subtract(7, 'months')?.format('MMMM') , 
+                    moment().subtract(6, 'months')?.format('MMMM') , 
+                    moment().subtract(5, 'months')?.format('MMMM') , 
+                    moment().subtract(4, 'months')?.format('MMMM') , 
+                    moment().subtract(3, 'months')?.format('MMMM') , 
+                    moment().subtract(2, 'months')?.format('MMMM') , 
+                    moment().subtract(1, 'months')?.format('MMMM') , 
+                    moment().format('MMMM') , 
+                ]
+                let makeData = []
+
+                monthList?.forEach(item => {
+                    makeData.push({
+                        month: item,
+                        value: anggotaThisYears?.filter(date => moment(date?.created_at)?.format('MMMM') === item)?.length
+                    })
+                })
+                setData(makeData)
+
+            })
+    };
+
+    // useEffect(() => {
+    //     fetch('https://gw.alipayobjects.com/os/bmw-prod/360c3eae-0c73-46f0-a982-4746a6095010.json')
+    //       .then((response) => response.json())
+    //       .then((json) => console.log(json))
+    //       .catch((error) => {
+    //         console.log('fetch data failed', error);
+    //       });
+    // },[])
+
+    const config = {
+        data,
+        xField: 'month',
+        yField: 'value',
+        xAxis: {
+            range: [0, 1],
+        },
+        areaStyle: () => {
+            return {
+              fill: 'l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff',
+            };
+          },
+    };
+
+    return (
+        <div>
+            <p className='text-center'>Grafik Anggota Bergabung {moment().subtract(1, 'y').format('YYYY')}/{moment().format('YYYY')}</p>
+            <Area {...config} />
+        </div>
     )
 }

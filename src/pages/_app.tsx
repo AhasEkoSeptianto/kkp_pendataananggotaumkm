@@ -39,6 +39,8 @@ import 'moment-timezone';
 import { NextUIProvider } from '@nextui-org/react';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-calendar/dist/Calendar.css';
+
 /* Configuration Start */
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay])
 const useScreen = createBreakpoint({ ...breakScreen } as {})

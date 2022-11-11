@@ -25,7 +25,11 @@ var anggota = new Schema({
   toko: {
     type: String,
     require: true
-  }
+  },
+  created_at: { 
+    type: Date, 
+    default: Date.now 
+  },
 });
 
 mongoose.models = {};
