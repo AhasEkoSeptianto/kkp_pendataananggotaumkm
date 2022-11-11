@@ -287,7 +287,7 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate, defaultData }) => {
             />
             <div className='my-1'>
                 <p>Tanggal Lahir</p>
-                <DatePicker<any,any>
+                <DatePicker
                     className="w-full"
                     onChange={(date_moment, date_string ) => setForm({ ...form, tanggal_lahir: date_string })}
                     format="YYYY-MM-DD"
