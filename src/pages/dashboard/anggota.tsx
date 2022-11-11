@@ -8,8 +8,9 @@ import { FcSearch } from 'react-icons/fc'
 import { IoSaveSharp } from 'react-icons/io5'
 import axios from "axios";
 import { toast } from "react-toastify";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import {QRCodeCanvas} from 'qrcode.react';
+import { PickerProps } from "antd/lib/calendar/generateCalendar";
 
 export default function DefaultAnggotaPage(){
 
@@ -251,6 +252,13 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate, defaultData }) => {
         })
     }
 
+    const GetDefaultDate = () => {
+
+        let res:any = form.tanggal_lahir ? moment(form.tanggal_lahir, 'YYYY-MM-DD') : undefined
+
+        return res
+    }
+    
     return (
         <form onSubmit={SubmitForm}>
             <Input 
@@ -289,9 +297,9 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate, defaultData }) => {
                 <p>Tanggal Lahir</p>
                 <DatePicker
                     className="w-full"
-                    onChange={(date_moment, date_string ) => setForm({ ...form, tanggal_lahir: date_string })}
+                    onChange={(date_moment, date_string ) => console.log(date_moment)}
                     format="YYYY-MM-DD"
-                    value={moment(form.tanggal_lahir, 'YYYY-MM-DD')}
+                    value={GetDefaultDate()}
                 />
             </div>
             {isTambahToko ? (
