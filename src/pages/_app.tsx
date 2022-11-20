@@ -26,7 +26,6 @@ import { breakScreen } from '@styles/breakpoint'
 import gridConfig from '@utils/configs/grid.config'
 import { locale } from '@utils/configs/localization.config'
 import { ScreenType } from '@utils/types/screen'
-import useMobileOS from '@utils/hooks/useMobileOS'
 import NProgress from 'nextjs-progressbar'
 import Head from 'next/head'
 import BRAND_NAME from '@utils/constants/brand'
@@ -36,7 +35,6 @@ import i18n from '../../i18n'
 import appWithI18n from 'next-translate/appWithI18n'
 import { useRouter } from 'next/router'
 import 'moment-timezone';
-import { NextUIProvider } from '@nextui-org/react';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-calendar/dist/Calendar.css';
@@ -64,27 +62,6 @@ const MainApp = ({ Component, pageProps }) => {
     dispatch(setScreenSize(screen as ScreenType)) // for set the screen type to global redux
   }, [screen, dispatch])
 
-
-
-  let notUseSidebar = [
-    '/',
-    '/admin/login',
-    '/admin/forgot-password',
-    '/admin/resend-email-verify',
-    '/admin/reset-password',
-    '/cm/login',
-    '/cm/verify-email',
-    '/cm/forgot-password',
-    '/cm/resend-email-verify',
-    '/cm/reset-password',
-    '/cm/api-user/verify-email'
-  ]
-
-  let notIncludeSidebatWithSlug = [
-    '/[user]/verify-email',
-    '/[user]/api-user/verify-email',
-    '/[user]/forgot-password'
-  ]
 
   return (
     <>

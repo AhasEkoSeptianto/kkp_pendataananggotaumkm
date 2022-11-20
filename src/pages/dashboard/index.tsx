@@ -9,6 +9,7 @@ import { Image } from 'antd'
 import { Area } from '@ant-design/plots';
 import moment from 'moment'
 import Calendar from 'react-calendar';
+import Head from 'next/head'
 
 export default function DashboardDefaultPage(){
 
@@ -24,65 +25,70 @@ export default function DashboardDefaultPage(){
                 setTtd(res?.data?.data)
             })
     },[])
-    console.log(ttd)
+    
     return (
-        <DashboardLayout>
-            <div className='p-10'>
-                <div className='space-y-2 lg:space-y-0 lg:grid grid-cols-3 gap-5 '>
-                    <div className='border shadow rounded p-5 relative'>
-                        <p className='font-semibold'>Total {summaryData?.totalAnggota} Anggota</p>
-                        <FaUsers className='text-4xl' />
-                        <div className='absolute top-0 right-0 p-2'>
-                            <Link href='/dashboard/anggota'>
-                                <div className='flex items-center justify-center'>
-                                    <p className='my-auto'>Lihat Detail</p>
-                                    <FiChevronsRight color='blue' />
-                                </div>
-                            </Link>
+        <Fragment>
+            <Head>
+                <title>Dashboard</title>
+            </Head>
+            <DashboardLayout>
+                <div className='p-10'>
+                    <div className='space-y-2 lg:space-y-0 lg:grid grid-cols-3 gap-5 '>
+                        <div className='border shadow rounded p-5 relative'>
+                            <p className='font-semibold'>Total {summaryData?.totalAnggota} Anggota</p>
+                            <FaUsers className='text-4xl' />
+                            <div className='absolute top-0 right-0 p-2'>
+                                <Link href='/dashboard/anggota'>
+                                    <div className='flex items-center justify-center'>
+                                        <p className='my-auto'>Lihat Detail</p>
+                                        <FiChevronsRight color='blue' />
+                                    </div>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className='border shadow rounded p-5 relative'>
+                            <p className='font-semibold'>Total {summaryData?.toko?.length} Toko</p>
+                            <BsShop className='text-4xl' />
+                            <div className='absolute top-0 right-0 p-2'>
+                                <Link href='/dashboard/anggota'>
+                                    <div className='flex items-center justify-center'>
+                                        <p className='my-auto'>Lihat Detail</p>
+                                        <FiChevronsRight color='blue' />
+                                    </div>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className='border shadow rounded p-5 relative'>
+                            <p className='font-semibold'>TTD atn.{ttd?.[0]?.nama}</p>
+                            <div className='w-14 h-14 relative'>
+                                <Image src={ttd?.[0]?.img_base64} />
+                            </div>
+                            <div className='absolute top-0 right-0 p-2'>
+                                <Link href='/dashboard/setting'>
+                                    <div className='flex items-center justify-center'>
+                                        <p className='my-auto'>Lihat Detail</p>
+                                        <FiChevronsRight color='blue' />
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                    <div className='border shadow rounded p-5 relative'>
-                        <p className='font-semibold'>Total {summaryData?.toko?.length} Toko</p>
-                        <BsShop className='text-4xl' />
-                        <div className='absolute top-0 right-0 p-2'>
-                            <Link href='/dashboard/anggota'>
-                                <div className='flex items-center justify-center'>
-                                    <p className='my-auto'>Lihat Detail</p>
-                                    <FiChevronsRight color='blue' />
-                                </div>
-                            </Link>
+
+                    <div className='lg:grid grid-cols-12 my-10 p-5 gap-5'>
+                        <div className='col-span-8'>
+                            <GrafikShow />
+                        </div>
+                        <div className='col-span-4'>
+                            <div className='m-10'>
+                                <Calendar onChange={() => {}} />
+                            </div>
                         </div>
                     </div>
-                    <div className='border shadow rounded p-5 relative'>
-                        <p className='font-semibold'>TTD atn.{ttd?.[0]?.nama}</p>
-                        <div className='w-14 h-14 relative'>
-                            <Image src={ttd?.[0]?.img_base64} />
-                        </div>
-                        <div className='absolute top-0 right-0 p-2'>
-                            <Link href='/dashboard/setting'>
-                                <div className='flex items-center justify-center'>
-                                    <p className='my-auto'>Lihat Detail</p>
-                                    <FiChevronsRight color='blue' />
-                                </div>
-                            </Link>
-                        </div>
-                    </div>
+
                 </div>
 
-                <div className='lg:grid grid-cols-12 my-10 p-5 gap-5'>
-                    <div className='col-span-8'>
-                        <GrafikShow />
-                    </div>
-                    <div className='col-span-4'>
-                        <div className='m-10'>
-                            <Calendar onChange={() => {}} />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </DashboardLayout>
+            </DashboardLayout>
+        </Fragment>
     )
 }
 

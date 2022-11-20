@@ -48,14 +48,14 @@ export default function LoginDefaultPage(){
                 </div>
             </div>
             <div className="flex flex-col items-center justify-center">
-                <div className="lg:hidden absolute bg-blue-primary w-screen h-screen flex items-center justify-center">
+                <div className="blur-lg lg:hidden absolute bg-blue-primary w-screen h-screen flex items-center justify-center">
                     <Image alt='' src={LogoMerchant} />
                 </div>
                 
                 <form className="my-20 w-10/12 lg:w-1/2 space-y-10 bg-white z-20 p-10 rounded" onSubmit={Submit}>
                     <div className="mb-5">
                         <p className="text-2xl font-semibold text-center">Welcome Back</p>
-                        <p className="text-xl text-center">Please login to your account</p>
+                        <p className="text-sm text-center">Please login to your account</p>
                     </div>
                     <Input 
                         onChange={e => setForm({ ...form, username: e.target.value })} 
@@ -71,7 +71,7 @@ export default function LoginDefaultPage(){
                         labelPlaceholder="Password" 
                     />
                     <Button type='submit' style={{ width: '100%' }}>
-                        {loadingSubmit ? <Loading color='white' /> : 'Submit' }
+                        {loadingSubmit ? <Loading size='sm' color='white' /> : 'Submit' }
                     </Button>
                 </form>
             </div>

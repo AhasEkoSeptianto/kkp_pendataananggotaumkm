@@ -9,6 +9,10 @@ var user = new Schema({
   password: {
     type: String,
     required: true
+  },
+  profile_picture: {
+    type: String,
+    required: true
   }
 });
 

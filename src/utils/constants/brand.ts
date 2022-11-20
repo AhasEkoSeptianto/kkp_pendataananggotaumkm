@@ -1,2 +1,2 @@
-const BRAND_NAME = 'Public/Private News API CRM'
+const BRAND_NAME = 'UMKM PAGUYUBAN THB BEKASI'
 export default BRAND_NAME

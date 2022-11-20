@@ -2,25 +2,156 @@ import DashboardLayout from "@base/src/components/dashboardLayout";
 import { Tabs, message, Upload, UploadProps } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { Button, Input, Loading } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Image } from 'antd';
 import { toast } from "react-toastify";
+import Head from "next/head";
+import { VscSaveAll } from 'react-icons/vsc'
+import { GiCancel } from 'react-icons/gi'
+import Cookies from "js-cookie";
 
 export default function DefaultAnggotaPage(){
     return (
-        <DashboardLayout>
-            <div className="m-10 shadow p-5">
-                <Tabs>
-                    <Tabs.TabPane tab="Profile" key="1">
-                        Content of Tab Pane 1
-                    </Tabs.TabPane>
-                    <Tabs.TabPane tab="Tanda Tangan Ketua/Kepemilikan" key="2">
-                        <UploadTandaTangan />
-                    </Tabs.TabPane>
-                </Tabs>
+        <Fragment>
+            <Head>
+                <title>Setting</title>
+            </Head>
+            <DashboardLayout>
+                <div className="m-10 shadow p-5">
+                    <Tabs>
+                        <Tabs.TabPane tab="Profile" key="1">
+                            <ProfileSetting />
+                        </Tabs.TabPane>
+                        <Tabs.TabPane tab="Tanda Tangan Ketua/Kepemilikan" key="2">
+                            <UploadTandaTangan />
+                        </Tabs.TabPane>
+                    </Tabs>
+                </div>
+            </DashboardLayout>
+        </Fragment>
+    )
+}
+
+const ProfileSetting = () => {
+
+    const [ form, setForm ] = useState({
+        _id: '',
+        profile_picture: '',
+        username: '',
+        password: '',
+        confirm_password: ''    
+    })
+    const [ oldData, setOldData ] = useState({
+        profile_picture: '',
+        username: '',
+        password: '',
+    })
+    const [ showSaveBtn, setShowSaveBtn ] = useState(false)
+    const [ loadingUpdate, setLoadingUpdate ] = useState(false)
+    const refInputFile = useRef(null)
+
+    useEffect(() => {
+        GetData()
+    },[])
+    
+    const GetData = async () => {
+        axios.get('/api/profile')
+            .then(res => {
+                let { _id, username, password, profile_picture } = res?.data?.data?.[0]
+                setForm({ ...form, _id: _id, username: username, profile_picture: profile_picture })
+                setOldData({ username: username, profile_picture: profile_picture, password: password })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    
+    useEffect(() => {
+        if (
+            form.username !== oldData.username ||
+            form.profile_picture !== oldData.profile_picture ||
+            form.password || form.confirm_password
+        ){
+            setShowSaveBtn(true)
+        }else{
+            setShowSaveBtn(false)
+        }
+    },[form, oldData])
+
+    const HandleChangeProfilePicture = (e) => {
+        let file = e.target.files[0]
+        var reader:any = new FileReader();
+            
+        reader.readAsBinaryString(file);
+
+        reader.onload = function() {
+            let base64Img = 'data:image/png;base64, ' + btoa(reader.result)
+            setForm({ ...form, profile_picture: base64Img })
+            
+        };
+        reader.onerror = function() {
+            console.log('there are some problems');
+        };   
+    }
+    const SubmitForm = async () => {
+        setLoadingUpdate(true)
+        
+        if (form.password || form.confirm_password){
+            if (form.password !== form.confirm_password){
+                return toast.error('Password not same', { position: toast.POSITION.TOP_CENTER })
+            }
+        }
+
+        var data = {
+            username: form.username,
+            profile_picture: form.profile_picture,
+            password: form?.password ? form.password : oldData.password
+        }
+
+        await axios.put('/api/profile', data, { params: {uniq_id: form._id} })
+            .then(async res => {
+                toast.success(res?.data?.msg, { position: toast.POSITION.TOP_CENTER })
+                GetData()
+                setShowSaveBtn(false)
+                
+            })
+            .catch(err => {
+                toast.error(err?.response?.data?.msg, { position: toast.POSITION.TOP_CENTER })
+            })
+        setLoadingUpdate(false)
+    }
+
+    return (
+        <Fragment>
+            <div className="flex items-start space-x-5 p-5">
+                <div className="w-36">
+                    <Image 
+                        preview={false}
+                        className='cursor-pointer'
+                        onClick={() => refInputFile.current?.click()}
+                        src={form.profile_picture}
+                    />
+                    <input type='file' className="hidden" ref={refInputFile} onChange={HandleChangeProfilePicture} />
+                </div>
+                <div className="flex items-start">
+                    <div className="flex flex-col space-y-2">
+                        <Input onChange={(e) => setForm({ ...form, username: e.target.value })} value={form.username} underlined labelLeft='username' />
+                        <Input.Password placeholder="default use old password" onChange={(e) => setForm({ ...form, password: e.target.value })} value={form.password} underlined labelLeft='password' />
+                        <Input.Password placeholder="default use old password" onChange={(e) => setForm({ ...form, confirm_password: e.target.value })} value={form.confirm_password} underlined labelLeft='confirm password' />
+                    </div>
+                    {showSaveBtn && (
+                        <div className="ml-5  space-y-2">
+                            <Button onClick={SubmitForm} icon={<VscSaveAll />} className='bg-blue-500' size='sm'>
+                                {loadingUpdate ? <Loading color='white' size='sm' /> : 'Simpan Profile'}
+                            </Button>
+                            <Button onClick={GetData} icon={<GiCancel />} className='bg-red-500' size='sm'>Batal</Button>
+                        </div>
+                    )}
+                </div>
             </div>
-        </DashboardLayout>
+        </Fragment>
     )
 }
 

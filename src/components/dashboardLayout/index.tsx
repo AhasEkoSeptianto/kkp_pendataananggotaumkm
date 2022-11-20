@@ -4,6 +4,8 @@ import Hamburger from 'hamburger-react'
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { BiLogOut, BiLogOutCircle } from 'react-icons/bi'
+import BRAND_NAME from "@utils/constants/brand";
+import { RiLogoutCircleRLine } from 'react-icons/ri'
 
 export default function DashboardLayout(props:any){
 
@@ -42,6 +44,15 @@ export default function DashboardLayout(props:any){
             )}
             
             <div className="col-span-12 lg:col-span-10">
+                <div className="hidden lg:flex items-center justify-between bg-blue-darkSecondary h-14 w-full">
+                    
+                    <p className="text-white my-auto ml-5 font-bold underline italic">{BRAND_NAME}</p>
+                    
+                    <div className={`py-3 px-5 mx-0.5 cursor-pointer flex items-center justify-center space-x-1`} onClick={Logout}>
+                        <p className='text-white my-auto'>Logout</p>
+                        <RiLogoutCircleRLine className='text-red-500 text-xl' />
+                    </div>
+                </div>
                 {props?.children}
             </div>
 

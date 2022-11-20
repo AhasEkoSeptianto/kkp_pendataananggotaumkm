@@ -5,7 +5,10 @@ import { AiFillHome, AiFillSetting } from 'react-icons/ai'
 import { HiUsers } from 'react-icons/hi'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import { Image } from 'antd';
 
 const ListMenu = [
     {
@@ -29,13 +32,28 @@ export default function Sidebar({ Logout }){
 
     const router = useRouter()
     
+    const [ users, setUsers ] = useState({
+        username: '',
+        profile_picture: ''
+    })
+    useEffect(() => {
+        axios.get('/api/profile')
+            .then(res => {
+                let { username, profile_picture } = res?.data?.data?.[0]
+                setUsers({ username: username, profile_picture: profile_picture })
+            })
+    },[])
+    
     return (
         <div className="bg-blue-secondary min-h-screen relative shadow-lg">
             <div className='py-10 flex flex-col items-center justify-center'>
-                <div className='p-4 bg-gray-600 rounded-full'>
-                    <RiAdminFill className='text-5xl text-white' />
+                <div className='w-24 h-24 rounded-full overflow-hidden'>
+                    <Image 
+                        preview={false}
+                        src={users?.profile_picture}
+                    />
                 </div>
-                <p className='text-white mt-2 font-semibold'>super admin</p>
+                <p className='text-white mt-2 font-semibold'>{users.username}</p>
             </div>
 
             <Divider className='bg-gray-500 h-.5 mb-2'  />
@@ -53,12 +71,12 @@ export default function Sidebar({ Logout }){
                 ))}
             </div>
 
-            <div className='absolute bottom-0 w-full'>
+            {/* <div className='absolute bottom-0 w-full'>
                 <div className={`py-3 px-5 mx-0.5 cursor-pointer flex items-center justify-center space-x-4 border border-darkSecondary`} onClick={Logout}>
                     <BiLogOut className='text-white text-xl' />
                     <p className='text-white my-auto'>Logout</p>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )
