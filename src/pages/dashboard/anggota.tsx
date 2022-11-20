@@ -3,15 +3,14 @@ import { Button, Input, Loading } from "@nextui-org/react";
 import { AiOutlinePlus, AiFillDelete, AiFillEdit, AiOutlineQrcode } from 'react-icons/ai'
 import { DatePicker, Drawer, Modal, Popconfirm, Select, Table } from 'antd';
 import { Fragment, useEffect, useRef, useState } from "react";
-import { CgArrowsExchangeAlt } from 'react-icons/cg'
 import { FcSearch } from 'react-icons/fc'
 import { IoSaveSharp } from 'react-icons/io5'
 import axios from "axios";
 import { toast } from "react-toastify";
 import moment, { Moment } from "moment";
 import {QRCodeCanvas} from 'qrcode.react';
-import { CSVLink, CSVDownload } from "react-csv";
 import Head from "next/head";
+import CsvDownloader from 'react-csv-downloader';
 
 export default function DefaultAnggotaPage(){
 
@@ -135,12 +134,43 @@ export default function DefaultAnggotaPage(){
     }
 
       const [ listToExport, setListToExport ] = useState([])
-      const [loadingExport, setLoadingExport] = useState(false)
-      
+      const columnHeaderExport = [
+        {
+            id: '_id',
+            displayName: '_id'
+        },
+        {
+            id: 'nama',
+            displayName: 'Nama'
+        },
+        {
+            id: 'noTelp',
+            displayName: 'No Telephone'
+        },
+        {
+            id: 'email',
+            displayName: 'Email'
+        },
+        {
+            id: 'tanggal_lahir',
+            displayName: 'Tanggal Lahir'
+        },
+        {
+            id: 'alamat',
+            displayName: 'Alamat'
+        },
+        {
+            id: 'toko',
+            displayName: 'Toko'
+        },
+        {
+            id: 'created_at',
+            displayName: 'Created At'
+        }
+      ]
 
-      const getAllAnggota = async (event, done) => {
-        setLoadingExport(true)
-        await axios.get('/api/anggota', { params: {
+      useEffect(() => {
+        axios.get('/api/anggota', { params: {
             page: 1,
             limit: 1000000,
             search: '',
@@ -148,25 +178,10 @@ export default function DefaultAnggotaPage(){
         }})
             .then(async res => {
                 let resData = res?.data?.data
-                let makeFormCsv = [
-                    ['_id', 'Nama', 'Email', 'No Telp', 'Alamat', 'Tanggal Lahir', 'Toko']
-                ]
-    
-                await resData?.forEach(item => {
-                    makeFormCsv.push([item?._id, item?.nama, item?.email, item?.noTelp, item?.alamat, item?.tanggal_lahir, item?.toko])
-                })
+                setListToExport(resData)
+            })
+      },[])
 
-                setListToExport(makeFormCsv)
-                done(true)
-            })
-            .catch(err => {
-                done(false)
-            })
-            .finally(() => {
-                setLoadingExport(false)
-            })
-
-      }
 
     return (
         <Fragment>
@@ -211,15 +226,14 @@ export default function DefaultAnggotaPage(){
 
                                             
                                 <div className="my-2">
-                                    <CSVLink 
-                                        data={listToExport}
-                                        asyncOnClick={true}
-                                        filename={"daftar_anggota_umkm_paguyuban.csv"}
-                                        onClick={getAllAnggota}
-                                        className='bg-blue-500 p-2 rounded text-white text-sm '
-                                    >
-                                        {loadingExport ? <Loading color='white' className="px-10" size="xs" /> : 'Export CSV' }
-                                    </CSVLink>
+                                    <Button className="bg-blue-500" size='xs'>
+                                        <CsvDownloader
+                                            filename="daftar_anggota_umkm_paguyuban"
+                                            extension=".csv"
+                                            columns={columnHeaderExport}
+                                            datas={listToExport}
+                                            text="Export Csv" />
+                                    </Button>
                                 </div>
                                 
                             </div>

@@ -10927,6 +10927,11 @@ file-loader@^6.0.0, file-loader@^6.2.0:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
+file-saver@^2.0.2:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.5.tgz#d61cfe2ce059f414d899e9dd6d4107ee25670c38"
+  integrity sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==
+
 file-system-cache@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/file-system-cache/-/file-system-cache-1.0.5.tgz"
@@ -14874,6 +14879,11 @@ pako@~1.0.5:
   resolved "https://registry.npmjs.org/pako/-/pako-1.0.11.tgz"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
 
+papaparse@^5.0.0:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.3.2.tgz#d1abed498a0ee299f103130a6109720404fbd467"
+  integrity sha512-6dNZu0Ki+gyV0eBsFKJhYr+MdQYAzFUGlBMNj3GNrmHxmz1lfRa24CjFObPXtjcetlOv5Ad299MhIK0znp3afw==
+
 parallel-transform@^1.1.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/parallel-transform/-/parallel-transform-1.2.0.tgz"
@@ -16582,6 +16592,20 @@ react-content-loader@^6.0.3:
   version "6.0.3"
   resolved "https://registry.npmjs.org/react-content-loader/-/react-content-loader-6.0.3.tgz"
   integrity sha512-CIRgTHze+ls+jGDIfCitw27YkW2XcaMpsYORTUdBxsMFiKuUYMnlvY76dZE4Lsaa9vFXVw+41ieBEK7SJt0nug==
+
+react-csv-downloader@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/react-csv-downloader/-/react-csv-downloader-2.9.0.tgz#652fad4bebef82835aa22c99b79fb5e6a96b73d9"
+  integrity sha512-0CpzDUC/kNSBcXMIo4FH7RP3ggZl3J7sowLLaBCLRmgbLsX2y902edVMEK8a24AdWEip91WjwJ38CHhX81Oc6g==
+  dependencies:
+    file-saver "^2.0.2"
+
+react-csv-export@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-csv-export/-/react-csv-export-0.0.3.tgz#227a658fd76143033dc1a3d461b25a57862a7ee5"
+  integrity sha512-Tb/gwfdY28O3ci+7UQ8bWBuqnb2WfbnOmRclgNeIEgdb8HG7o1mfXf6D3HKWIos+nE0SI0X3z3S+a+M7CFTptQ==
+  dependencies:
+    papaparse "^5.0.0"
 
 react-csv@^2.2.2:
   version "2.2.2"
