@@ -65,6 +65,7 @@ export default function AnggotaCard({ anggota, ttd }){
 
 // This function gets called at build time
 export async function getServerSideProps(context) {
+    console.log(context)
     const { params, req   } = context
     let uniq_id = params?.user_id
     const { origin } = absoluteUrl(req)

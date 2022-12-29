@@ -1,7 +1,7 @@
 import DashboardLayout from "@base/src/components/dashboardLayout";
 import { Button, Input, Loading } from "@nextui-org/react";
 import { AiOutlinePlus, AiFillDelete, AiFillEdit, AiOutlineQrcode } from 'react-icons/ai'
-import { DatePicker, Drawer, Modal, Popconfirm, Select, Table } from 'antd';
+import { DatePicker, Drawer, Modal, Popconfirm, Select, Table, Tag } from 'antd';
 import { Fragment, useEffect, useRef, useState } from "react";
 import { FcSearch } from 'react-icons/fc'
 import { IoSaveSharp } from 'react-icons/io5'
@@ -31,6 +31,7 @@ export default function DefaultAnggotaPage(){
     useEffect(() => {
         RefreshDataAnggota()
     },[paramsGet])
+
     const RefreshDataAnggota = () => {
         setLoadingFetchAnggota(true)
         axios.get('/api/anggota', { params: paramsGet })
@@ -54,8 +55,14 @@ export default function DefaultAnggotaPage(){
         }
     },[drawer])
     
+    console.log(listAnggota)
 
     const columnsTable = [
+        {
+            key: '_id',
+            dataIndex: '_id',
+            title: 'ID'
+        },
         {
             key: 'nama',
             dataIndex: 'nama',
@@ -85,6 +92,21 @@ export default function DefaultAnggotaPage(){
             key: 'toko',
             dataIndex:'toko',
             title: 'Toko'
+        },
+        {
+            key: 'status',
+            title: 'Status',
+            render: (text, record) => {
+                const colorStatus = {
+                    'Pending': 'yellow',
+                }
+
+                if (record?.status){
+                    return (
+                        <Tag color={colorStatus[record?.status]}>{record.status}</Tag>
+                    )
+                }
+            }
         },
         {
             key: '_created',
@@ -182,6 +204,7 @@ export default function DefaultAnggotaPage(){
             })
       },[])
 
+      
 
     return (
         <Fragment>

@@ -37,15 +37,14 @@ export default function Sidebar({ Logout }){
         profile_picture: ''
     })
     useEffect(() => {
-        axios.get('/api/profile')
-            .then(res => {
-                let { username, profile_picture } = res?.data?.data?.[0]
-                setUsers({ username: username, profile_picture: profile_picture })
-            })
+        setUsers({ 
+            username: Cookies.get('username'),
+            profile_picture: Cookies.get('profile_picture') 
+        })
     },[])
     
     return (
-        <div className="bg-blue-secondary min-h-screen relative shadow-lg">
+        <div className="bg-blue-secondary min-h-screen relative shadow-lg hidden lg:block col-span-2">
             <div className='py-10 flex flex-col items-center justify-center'>
                 <div className='w-24 h-24 rounded-full overflow-hidden'>
                     <Image 

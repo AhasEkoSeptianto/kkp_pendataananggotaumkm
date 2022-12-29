@@ -22,8 +22,7 @@ export default async function handler(req:any, res:any) {
                 { id: user?.[0]?._id, username: user?.[0]?.username },
                 process.env.JWTTOKEN
             );
-        
-            res.status(200).json({ login: true, msg:'success', token: token, name: user?.[0].name, user_id:user[0]._id });
+            res.status(200).json({ login: true, msg:'success', token: token, username: user?.[0].username, user_id:user[0]._id, profile_picture: user?.[0]?.profile_picture });
       } catch (error) {
         res.status(400).json({ success: false })
       }

@@ -21,7 +21,11 @@ export default function LoginDefaultPage(){
         setLoadingSubmit(true)
         Axios.post('/api/login', form)
             .then(res => {
-                Cookies.set('token', res?.data?.token)
+                const { profile_picture, token, username } = res?.data
+                console.log(res?.data)
+                Cookies.set('token', token)
+                Cookies.set('profile_picture', profile_picture)
+                Cookies.set('username', username)
                 window.location.href= '/dashboard'
             })
             .catch(err => {

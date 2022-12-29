@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+var uniqueValidator = require('mongoose-unique-validator')
+
 var Schema = mongoose.Schema;
 
 var anggota = new Schema({
@@ -8,7 +10,8 @@ var anggota = new Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
   },
   noTelp: {
     type: String,
@@ -26,12 +29,17 @@ var anggota = new Schema({
     type: String,
     require: true
   },
+  status: {
+    type: String,
+    required: true
+  },
   created_at: { 
     type: Date, 
     default: Date.now 
   },
 });
 
+anggota.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' });
 mongoose.models = {};
 
 var Anggota = mongoose.model('anggota', anggota);

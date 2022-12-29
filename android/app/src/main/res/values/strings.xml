@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">kkp_pendataan_anggota</string>
+    <string name="title_activity_main">kkp_pendataan_anggota</string>
+    <string name="package_name">com.kkp_pendataan_anggota</string>
+    <string name="custom_url_scheme">com.kkp_pendataan_anggota</string>
+</resources>

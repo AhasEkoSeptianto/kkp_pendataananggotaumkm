@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import Head from "next/head";
 import { VscSaveAll } from 'react-icons/vsc'
 import { GiCancel } from 'react-icons/gi'
+import { AiTwotoneEdit } from 'react-icons/ai'
 import Cookies from "js-cookie";
 
 export default function DefaultAnggotaPage(){
@@ -43,9 +44,11 @@ const ProfileSetting = () => {
         confirm_password: ''    
     })
     const [ oldData, setOldData ] = useState({
+        _id: '',
         profile_picture: '',
         username: '',
         password: '',
+        confirm_password: ''
     })
     const [ showSaveBtn, setShowSaveBtn ] = useState(false)
     const [ loadingUpdate, setLoadingUpdate ] = useState(false)
@@ -60,25 +63,13 @@ const ProfileSetting = () => {
             .then(res => {
                 let { _id, username, password, profile_picture } = res?.data?.data?.[0]
                 setForm({ ...form, _id: _id, username: username, profile_picture: profile_picture })
-                setOldData({ username: username, profile_picture: profile_picture, password: password })
+                setOldData({ _id: _id, username: username, profile_picture: profile_picture, password: password, confirm_password: '' })
             })
             .catch(err => {
                 console.log(err)
             })
     }
 
-    
-    useEffect(() => {
-        if (
-            form.username !== oldData.username ||
-            form.profile_picture !== oldData.profile_picture ||
-            form.password || form.confirm_password
-        ){
-            setShowSaveBtn(true)
-        }else{
-            setShowSaveBtn(false)
-        }
-    },[form, oldData])
 
     const HandleChangeProfilePicture = (e) => {
         let file = e.target.files[0]
@@ -125,28 +116,38 @@ const ProfileSetting = () => {
 
     return (
         <Fragment>
-            <div className="flex items-start space-x-5 p-5">
+            <div className="lg:flex items-start space-x-5 p-5">
                 <div className="w-36">
                     <Image 
                         preview={false}
                         className='cursor-pointer'
-                        onClick={() => refInputFile.current?.click()}
-                        src={form.profile_picture}
+                        // onClick={() => refInputFile.current?.click()}
+                        src={oldData.profile_picture}
                     />
                     <input type='file' className="hidden" ref={refInputFile} onChange={HandleChangeProfilePicture} />
                 </div>
-                <div className="flex items-start">
+                <div className="lg:flex items-start">
                     <div className="flex flex-col space-y-2">
                         <Input onChange={(e) => setForm({ ...form, username: e.target.value })} value={form.username} underlined labelLeft='username' />
                         <Input.Password placeholder="default use old password" onChange={(e) => setForm({ ...form, password: e.target.value })} value={form.password} underlined labelLeft='password' />
                         <Input.Password placeholder="default use old password" onChange={(e) => setForm({ ...form, confirm_password: e.target.value })} value={form.confirm_password} underlined labelLeft='confirm password' />
+                        {showSaveBtn && (
+                            <Input onChange={(e) => setForm({ ...form, profile_picture: e.target.value })} value={form.profile_picture} underlined labelLeft='link profile picture' placeholder="type link profile picture" />
+                        )}
                     </div>
-                    {showSaveBtn && (
-                        <div className="ml-5  space-y-2">
-                            <Button onClick={SubmitForm} icon={<VscSaveAll />} className='bg-blue-500' size='sm'>
+                    {showSaveBtn ? (
+                        <div className=" ml-5  space-y-2 mt-3 lg:mt-0">
+                            <Button  aria-labelledby="123123" onPress={SubmitForm} icon={<VscSaveAll />} className='bg-blue-500' size='sm'>
                                 {loadingUpdate ? <Loading color='white' size='sm' /> : 'Simpan Profile'}
                             </Button>
-                            <Button onClick={GetData} icon={<GiCancel />} className='bg-red-500' size='sm'>Batal</Button>
+                            <Button aria-labelledby="123123" onPress={() => {
+                                setForm({...oldData, password: ''})
+                                setShowSaveBtn(false)
+                            }} icon={<GiCancel />} className='bg-red-500' size='sm'>Batal</Button>
+                        </div>
+                    ): (
+                        <div className="ml-5 mt-3 lg:mt-0">
+                            <Button aria-labelledby="123123" onPress={() => setShowSaveBtn(true)} icon={<AiTwotoneEdit />} className='bg-blue-500' size='sm'>Edit</Button>
                         </div>
                     )}
                 </div>
@@ -166,12 +167,16 @@ const UploadTandaTangan  = () => {
     })
     const [ loadingUpdate, setLoadingUpdate ] = useState(false)
     useEffect(() => {
+        GetTTD()
+    },[])
+
+
+    const GetTTD = async () => {
         axios.get('/api/ttd')
             .then(res => {
                 setDataImg(res?.data?.data?.[0])
             })
-    },[])
-
+    }
       
 
     const props: UploadProps = {

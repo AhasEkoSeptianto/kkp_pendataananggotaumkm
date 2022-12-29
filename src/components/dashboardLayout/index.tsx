@@ -25,9 +25,9 @@ export default function DashboardLayout(props:any){
     
     return (
         <div className="grid grid-cols-12 overflow-hidden">
-            <div className="hidden lg:block col-span-2">
-                <Sidebar Logout={Logout} />
-            </div>
+            
+            <Sidebar Logout={Logout} />
+            
 
             {isOpenMobileMenu && (
                 <div className='absolute top-0 left-0 p-5 lg:hidden' style={{ zIndex: 1500 }}>
