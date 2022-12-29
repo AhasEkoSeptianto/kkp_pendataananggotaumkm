@@ -22,10 +22,7 @@ export default async function handler(req:any, res:any) {
                 let queryExe = { nama: IsIncludes(search),  email: IsIncludes(search), toko: IsIncludes(toko)}
                 let total = await Anggota.count({})
                 
-                
-
                 let anggota = await Anggota.find(queryExe).sort({ createdAt: -1 }).skip(page).limit(limit)
-                // let anggota = await Anggota.find({})
                 res?.status(200).json({ msg: 'berhasil mengambil data', data: anggota, totalData: total })
 
             }catch(err){

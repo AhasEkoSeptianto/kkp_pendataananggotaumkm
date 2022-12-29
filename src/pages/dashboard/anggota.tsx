@@ -1,10 +1,11 @@
 import DashboardLayout from "@base/src/components/dashboardLayout";
-import { Button, Input, Loading } from "@nextui-org/react";
+import { Button, Input, Loading, Tooltip } from "@nextui-org/react";
 import { AiOutlinePlus, AiFillDelete, AiFillEdit, AiOutlineQrcode } from 'react-icons/ai'
-import { DatePicker, Drawer, Modal, Popconfirm, Select, Table, Tag } from 'antd';
+import { DatePicker, Drawer, Modal, Popconfirm, Radio, Select, Table, Tag } from 'antd';
 import { Fragment, useEffect, useRef, useState } from "react";
 import { FcSearch } from 'react-icons/fc'
 import { IoSaveSharp } from 'react-icons/io5'
+import { MdModeEdit } from 'react-icons/md'
 import axios from "axios";
 import { toast } from "react-toastify";
 import moment, { Moment } from "moment";
@@ -95,18 +96,15 @@ export default function DefaultAnggotaPage(){
         },
         {
             key: 'status',
-            title: 'Status',
-            render: (text, record) => {
-                const colorStatus = {
-                    'Pending': 'yellow',
-                }
-
-                if (record?.status){
-                    return (
-                        <Tag color={colorStatus[record?.status]}>{record.status}</Tag>
-                    )
-                }
-            }
+            title: (
+                <Tooltip content='editable column status'>
+                    <span className="flex">
+                        Status
+                        <MdModeEdit size={10} className='ml-2 mt-2' />
+                    </span>
+                </Tooltip>
+            ),
+            render: (text, record) => <RenderStatusTable record={record} mutate={RefreshDataAnggota} />
         },
         {
             key: '_created',
@@ -203,7 +201,7 @@ export default function DefaultAnggotaPage(){
                 setListToExport(resData)
             })
       },[])
-
+      console.log(listAnggota)
       
 
     return (
@@ -469,4 +467,67 @@ const RenderQRCode = ({ record }) => {
             <AiOutlineQrcode  onClick={() => setOpenModal(true)} className="text-green-500 text-lg cursor-pointer" />
         </Fragment>
     )
+}
+
+const RenderStatusTable = ({ record, mutate }) => {
+
+    const [ openModal, setOpenModal ] = useState(false)
+    const [ selectedValue,setSelectedValue ] = useState(record?.status)
+    const [ loadingSubmit, setLoadingSubmit ] = useState(false)
+
+    const colorStatus = {
+        'Pending': 'yellow',
+        'Aktif': 'blue',
+        'Tidak aktif': 'red',
+        '': 'red'
+    }
+
+    const HandleSubmit = async () => {
+        setLoadingSubmit(true)
+        await axios.put('/api/anggota/status', { status: selectedValue }, { params: { uniq_id: record?._id } })
+            .then(res => {
+                toast.success(res?.data?.message)
+                setOpenModal(false)
+                mutate()
+            }).catch(err => {
+                toast.error(err?.response?.message)
+            })
+        setLoadingSubmit(false)
+    }
+
+    return (
+        <Fragment>
+
+            <Modal
+                open={openModal}
+                title={`Ubah status anggota ${record?.nama}`}
+                onCancel={() => setOpenModal(false)}
+                okText='Submit'
+                confirmLoading={loadingSubmit}
+                onOk={HandleSubmit}
+            >
+                <div>
+                    <p>Status Anggota :</p>
+                    <Radio.Group name='status anggota' onChange={({ target }) => setSelectedValue(target.value)}>
+                        <Radio value='Aktif'>Aktif</Radio>
+                        <Radio value='Tidak aktif'>Tidak aktif</Radio>
+                        <Radio value='Berhenti'>Berhenti</Radio>
+                    </Radio.Group>
+
+                    {record?.berhenti_pada && (
+                        <p className="mt-10 italic underline">berhenti pada {moment(record?.berhenti_pada).format('LLLL')}</p>
+                    )}
+                </div>
+            </Modal>
+
+            <Tag 
+                color={colorStatus[record?.status] || 'red'}
+                className='cursor-pointer'
+                onClick={() => setOpenModal(true)}
+            >
+                {record.status || 'Tidak Aktif'}
+            </Tag>
+        </Fragment>
+    )
+    
 }

@@ -37,6 +37,9 @@ var anggota = new Schema({
     type: Date, 
     default: Date.now 
   },
+  berhenti_pada: {
+    type: Date,
+  }
 });
 
 anggota.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' });
