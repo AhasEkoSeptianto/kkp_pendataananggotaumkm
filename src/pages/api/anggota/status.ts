@@ -10,6 +10,8 @@ export default async function handler(req:any, res:any) {
     
     await dbConnect()
 
+    
+
     switch (method) {
         case 'PUT':
             try{

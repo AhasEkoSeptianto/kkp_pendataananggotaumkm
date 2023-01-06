@@ -3731,13 +3731,13 @@
     "@draft-js-plugins/buttons" "^4.0.0"
     "@draft-js-plugins/utils" "^4.0.0"
 
-"@draft-js-plugins/anchor@^4.1.4":
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/anchor/-/anchor-4.1.4.tgz#c1fe7b79775e0bea1fd94f2ad07fd48b22aa419b"
-  integrity sha512-FAuKkFBs2kxbDpMaWXR9HeLMnI5C+1ZWJY1pUOCiumzukO8Jl2CnfAp3Ack+UUPB6claX2Ygro6vBzKnb0RhwA==
+"@draft-js-plugins/anchor@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/anchor/-/anchor-4.2.0.tgz#17c00f22d912e66fdea892f932d852a2a5563c1c"
+  integrity sha512-FZXegYNZgAMrU6tesM3SywBKLoxOj7Eae3D9KzJcHx3CF/ldWcbxU3dqV3+OYtP+FFB3wIe2YUGYp+hroaVlkw==
   dependencies:
     "@draft-js-plugins/utils" "^4.0.0"
-    clsx "^1.0.4"
+    clsx "^1.2.1"
     prepend-http "3.0.1"
     prop-types "^15.8.1"
     tlds "^1.231.0"
@@ -3749,10 +3749,10 @@
   dependencies:
     clsx "^1.2.1"
 
-"@draft-js-plugins/drag-n-drop-upload@^4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/drag-n-drop-upload/-/drag-n-drop-upload-4.2.2.tgz#0a64e4591bce6ab5d8c1119bb94a81d93ffdc616"
-  integrity sha512-Y56D1xjgfC8Hw48wEPdku3gHiQeqET3qK6VODhUZ367PsdG73aNfbH+S66SmAO/R42/mzTtL4IyfwxZKX+2rgg==
+"@draft-js-plugins/drag-n-drop-upload@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/drag-n-drop-upload/-/drag-n-drop-upload-4.2.3.tgz#d51260a98fa3fc3e30dd81899a853baa32015af6"
+  integrity sha512-4hvW/2Me0WqokIlGL3MYu7WHAoc0ITX11EUr+65uI2q6w03UHdz1v4TsONf3Lo0fuSLWrwTKX+QeUTkF5ATzmg==
 
 "@draft-js-plugins/drag-n-drop@^4.2.2":
   version "4.2.2"
@@ -3769,12 +3769,12 @@
     immutable "~3.7.4"
     prop-types "^15.8.1"
 
-"@draft-js-plugins/focus@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/focus/-/focus-4.1.3.tgz#6dc0516c7c57678b629af45eb703620cb79ee95d"
-  integrity sha512-0VWROy2pUT0gK81XJmupT/SvdV9GnPv3dOL89sidZxFBj00LQt+eLnBAv+4dhOokgmlUnBRBqRPvbhlw0nBEfA==
+"@draft-js-plugins/focus@^4.1.4":
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/focus/-/focus-4.1.4.tgz#9b1be8ce5c2e0a36b6044b16dd3b17be6408fbcb"
+  integrity sha512-yzOTp6PyszMM/EjQ6EArMU25FVVf7Q4lXIs9RAO74R+MUH+ROcmMdemINMHujLD84/SL9GmDjmA9VTwgXuMPpw==
   dependencies:
-    clsx "^1.0.4"
+    clsx "^1.2.1"
     immutable "~3.7.4"
 
 "@draft-js-plugins/hashtag@^4.2.2":
@@ -3791,10 +3791,10 @@
   dependencies:
     clsx "^1.0.4"
 
-"@draft-js-plugins/inline-toolbar@^4.1.6":
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/inline-toolbar/-/inline-toolbar-4.1.6.tgz#a7d7f28e9c8624ea7aa9b16515a31d0e744cece7"
-  integrity sha512-Y/ZvKzncLXKi6kwJdyclz1sAkDYSwJ4GYBaASP96a1AjH+mLNkL1Uh8hlBtw4cgJNlz+vCuxdfBeb7bZCwfeUw==
+"@draft-js-plugins/inline-toolbar@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/inline-toolbar/-/inline-toolbar-4.2.0.tgz#345b596675e36fe8c9a37affac171fe1f3940f12"
+  integrity sha512-A3BoWOhn1Q8RUX+7+032jU4Fr5efYUa+3YFvPzxLt7CCg6DRdh9zuXzJZnrlxo5LnRPhohAbXN2ioT8lsBA+cQ==
   dependencies:
     "@draft-js-plugins/buttons" "^4.0.0"
     "@draft-js-plugins/utils" "^4.0.0"
@@ -4150,7 +4150,7 @@
 
 "@iconscout/react-unicons@^1.1.6":
   version "1.1.6"
-  resolved "https://registry.npmjs.org/@iconscout/react-unicons/-/react-unicons-1.1.6.tgz"
+  resolved "https://registry.yarnpkg.com/@iconscout/react-unicons/-/react-unicons-1.1.6.tgz#4137afb831666f9c6d3b45a410610b9db9507f3a"
   integrity sha512-BnyVvBew7Vm1lvL8+qyqjchUbkVHlDyNAlN+r5b+0P0KrkQ66BHPBuJEJ2faT89L8qRu+TohE7dHMV+bndje3Q==
   dependencies:
     react ">=15.0.0 <17.0.0"
@@ -12223,10 +12223,10 @@ html-tags@^3.1.0:
   resolved "https://registry.npmjs.org/html-tags/-/html-tags-3.1.0.tgz"
   integrity sha512-1qYz89hW3lFDEazhjW0yVAV87lw8lVkrJocr72XmBkMKsoSVJCQx3W8BXsC7hO2qAt8BoVjYjtAcZ9perqGnNg==
 
-html-to-draftjs@1.4:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/html-to-draftjs/-/html-to-draftjs-1.4.0.tgz#8a3cbbba5b49d50be8ce85cc08b112d5bf00fc1d"
-  integrity sha512-LecsJqfuu7hefCeLkuCqaheYY+Gup43In8k8SMjLHjWd+em9VhrOEl5Rnsab7zWKTBevIQ4KGQT2h8OKlmarTQ==
+html-to-draftjs@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/html-to-draftjs/-/html-to-draftjs-1.5.0.tgz#0df0eabf429deaedb63f5c859889e2c983606e86"
+  integrity sha512-kggLXBNciKDwKf+KYsuE+V5gw4dZ7nHyGMX9m0wy7urzWjKGWyNFetmArRLvRV0VrxKN70WylFsJvMTJx02OBQ==
 
 html-void-elements@^1.0.0:
   version "1.0.5"
