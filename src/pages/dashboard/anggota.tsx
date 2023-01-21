@@ -62,7 +62,7 @@ export default function DefaultAnggotaPage(){
         {
             key: '_id',
             dataIndex: '_id',
-            title: 'ID'
+            title: 'UNIQUE ID'
         },
         {
             key: 'nama',
@@ -346,6 +346,7 @@ const DrawerAddAnggota = ({ open, listToko, onClose, mutate, defaultData }) => {
             mutate()
             onClose()
         }).catch(err => {
+            console.log(err)
             toast.error(err?.data?.msg, { position: toast.POSITION.TOP_CENTER })
         }).finally(() => {
             setLoadingSubmit(false)

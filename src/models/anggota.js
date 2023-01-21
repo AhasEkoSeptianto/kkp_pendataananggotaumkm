@@ -31,7 +31,6 @@ var anggota = new Schema({
   },
   status: {
     type: String,
-    required: true
   },
   created_at: { 
     type: Date, 

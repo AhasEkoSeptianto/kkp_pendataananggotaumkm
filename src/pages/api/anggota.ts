@@ -38,7 +38,8 @@ export default async function handler(req:any, res:any) {
                     noTelp: noTelp,
                     alamat: alamat,
                     tanggal_lahir: tanggal_lahir,
-                    toko: toko
+                    toko: toko,
+                    status: 'Aktif'
                 })
             
                 try {
@@ -61,7 +62,7 @@ export default async function handler(req:any, res:any) {
                     noTelp: noTelp,
                     alamat: alamat,
                     tanggal_lahir: tanggal_lahir,
-                    toko: toko
+                    toko: toko,
                 },{new: true, useFindAndModify: false})
             
                 res.status(200).send({msg: 'berhasil mengubah data anggota'});
