@@ -1,11 +1,15 @@
 import User from '@base/src/models/user'
 const jwt = require("jsonwebtoken");
 import dbConnect from '@base/src/midleware/mongodb'
+import isAuth from '@base/src/midleware/isAuth';
 
 export default async function handler(req:any, res:any) {
   const { method } = req
 
   await dbConnect()
+
+  await isAuth(req, res)
+
 
   switch (method) {
     case 'GET':

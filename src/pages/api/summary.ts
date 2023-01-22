@@ -5,11 +5,14 @@ import dbConnect from '@base/src/midleware/mongodb'
 import Anggota from '@base/src/models/anggota';
 import { ValidatePagination } from '@utils/helpers/paginationBE';
 import { IsIncludes } from '@utils/helpers/containsBE';
+import isAuth from '@base/src/midleware/isAuth';
 
 export default async function handler(req:any, res:any) {
     const { method } = req
     
     await dbConnect()
+
+    await isAuth(req, res)
 
     switch (method) {
         
