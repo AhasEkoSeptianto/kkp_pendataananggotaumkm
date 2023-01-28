@@ -5,7 +5,7 @@ import absoluteUrl from 'next-absolute-url'
 
 export default function AnggotaCard({ anggota, ttd }){
     
-    
+    console.log(anggota)
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-gray-100">
             <div className="w-full lg:w-1/2 h-2/6 lg:h-3/6 shadow-lg border rounded-lg overflow-hidden" id='card_anggota'>
@@ -14,6 +14,10 @@ export default function AnggotaCard({ anggota, ttd }){
                 </div>
                 <div className="grid grid-cols-12 p-5 h-4/6">
                     <div className="col-span-8">
+                        <div className="flex items-center">
+                            <p className="w-4/12 lg:w-2/12 text-sm lg:text-lg">UNIQUE ID</p>
+                            <p className="text-sm lg:text-lg whitespace-wrap">: {anggota?._id}</p>
+                        </div>
                         <div className="flex items-center">
                             <p className="w-4/12 lg:w-2/12 text-sm lg:text-lg">Nama</p>
                             <p className="text-sm lg:text-lg">: {anggota?.nama}</p>

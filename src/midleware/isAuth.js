@@ -24,16 +24,20 @@ const isAuth = (req, res) => {
 
 		if (!token){
 			return res.status(401).json({ msg: 'no authenticated token' });
+		}else{
+			const verify = jwt.verify(token, process.env.JWTTOKEN);
+			if (!verify){
+				return res.status(401).json({ msg: 'token verification failed' });
+			}
 		}
 
-		const verify = jwt.verify(token, process.env.JWTTOKEN);
-		if (!verify){
-			return res.status(401).json({ msg: 'token verification failed' });
-		}
 
 	}catch{
 		
 	}
 }
+
+
+
 
 module.exports = isAuth

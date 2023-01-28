@@ -10,6 +10,8 @@ const setting = {
   theme: {
     extend: {
       colors: {
+        primaryToko: '#D2001A',
+        primaryTokoSolid: '#FF1E00',
         blue: {
           primary: "#2b58bd",
           secondary: "#1f2945",
