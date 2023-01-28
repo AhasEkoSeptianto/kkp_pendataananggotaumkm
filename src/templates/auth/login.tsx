@@ -80,7 +80,7 @@ export default function LoginDefaultPage(){
                 <div className="absolute top-0 right-0">
                     <Link href='/toko'>
                         <a>
-                             <p className="p-5 font-semibold">Login Sebagai Toko ? Klik Disini >></p>
+                             <p className="p-5 font-semibold">Login Sebagai Toko ? Klik Disini {' >>'}</p>
                         </a>
                     </Link>
                 </div>
