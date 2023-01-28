@@ -4,7 +4,7 @@ import dbConnect from '@base/src/midleware/mongodb'
 import Anggota from '@base/src/models/anggota';
 import { ValidatePagination } from '@utils/helpers/paginationBE';
 import { IsIncludes } from '@utils/helpers/containsBE';
-import isAuth from '@base/src/midleware/isAuth';
+import isAuthToko from '@base/src/midleware/isAuthToko';
 
 export default async function handler(req:any, res:any) {
     const { method } = req
@@ -12,8 +12,11 @@ export default async function handler(req:any, res:any) {
     const { uniq_id, search } = req.query
     
     await dbConnect()
-
-    isAuth(req, res);
+    try {
+        isAuthToko(req, res)
+    }catch{
+        
+    }
 
     switch (method) {
         

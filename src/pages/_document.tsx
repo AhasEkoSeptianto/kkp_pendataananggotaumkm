@@ -10,7 +10,10 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="id">
-        <Head>{CssBaseline.flush()}</Head>
+        <Head>
+          {CssBaseline.flush()}
+          <link rel="shortcut icon" href="/favicon_real.ico" />  
+        </Head>
         <Main />
         <NextScript />
       </Html>

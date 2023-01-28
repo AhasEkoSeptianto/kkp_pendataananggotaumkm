@@ -1,36 +1,28 @@
-import User from '@base/src/models/user'
-import TTD from '@base/src/models/ttd'
 const jwt = require("jsonwebtoken");
 import dbConnect from '@base/src/midleware/mongodb'
 import Anggota from '@base/src/models/anggota';
-import { ValidatePagination } from '@utils/helpers/paginationBE';
 import { IsIncludes } from '@utils/helpers/containsBE';
-import isAuth from '@base/src/midleware/isAuth';
+import isAuthToko from '@base/src/midleware/isAuthToko';
 
 export default async function handler(req:any, res:any) {
     const { method } = req
-    
+    const { toko } = req?.query
     await dbConnect()
 
-    await isAuth(req, res)
+    try{
+        await isAuthToko(req, res)
+    }catch{
+        
+    }
 
     switch (method) {
         
         case 'GET':
             try {
-                let totalAnggota = await Anggota.count({})
-                let Ttd = await TTD.find({})
-                // get all list name toko
-                let anggota: any = await Anggota.find({})
-                let toko = anggota?.map(item => item?.['toko'])
-                
-                // filter all same toko
-                toko = [...new Set(toko)]
+                let totalAnggota = await Anggota.find({ toko: IsIncludes(toko) })
                 
                 let makeResp = {
-                    totalAnggota: totalAnggota,
-                    Ttd: Ttd,
-                    toko: toko
+                    totalAnggota: totalAnggota?.length,
                 }
 
                 res?.status(200).json({ msg: 'berhasil mengambil data', data: makeResp })

@@ -56,7 +56,6 @@ export default function DefaultAnggotaPage(){
         }
     },[drawer])
     
-    console.log(listAnggota)
 
     const columnsTable = [
         {

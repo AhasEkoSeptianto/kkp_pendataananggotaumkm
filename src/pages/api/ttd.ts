@@ -1,6 +1,7 @@
 import Ttd from '@base/src/models/ttd'
 const jwt = require("jsonwebtoken");
 import dbConnect from '@base/src/midleware/mongodb'
+import isAuth from '@base/src/midleware/isAuth';
 
 export default async function handler(req:any, res:any) {
   const { method } = req
@@ -18,6 +19,7 @@ export default async function handler(req:any, res:any) {
       break
     case 'PUT': 
         try {
+            await isAuth(req, res);
             let ttd = await Ttd.findOneAndUpdate({ id: req.query.uniq_id }, {
                 img_base64: req.body.img_base64,
                 nama: req.body.nama

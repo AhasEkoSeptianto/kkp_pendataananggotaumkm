@@ -5,15 +5,16 @@ import Anggota from '@base/src/models/anggota';
 import { ValidatePagination } from '@utils/helpers/paginationBE';
 import { IsIncludes } from '@utils/helpers/containsBE';
 import moment from 'moment';
+import isAuth from '@base/src/midleware/isAuth';
 
 const today = moment().startOf('day')
 
 export default async function handler(req:any, res:any) {
     const { method } = req
-    const {nama, email, noTelp, alamat, tanggal_lahir, toko} = req.body
-    const { uniq_id, search } = req.query
-    
+
     await dbConnect()
+
+    await isAuth(req, res);
 
     switch (method) {
         
