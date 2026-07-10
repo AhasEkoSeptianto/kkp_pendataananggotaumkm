@@ -1,9 +1,9 @@
-const nextCompose = require('next-compose-plugins')
-const { withFonts } = require('@moxy/next-common-files')
-const TerserPlugin = require('terser-webpack-plugin')
+const nextCompose = require("next-compose-plugins");
+const { withFonts } = require("@moxy/next-common-files");
+const TerserPlugin = require("terser-webpack-plugin");
 // const optimizedImages = require('next-optimized-images');
 // const nextTranslate = require('next-translate')
-var moment = require('moment-timezone')
+var moment = require("moment-timezone");
 /** @type {import('next').NextConfig} */
 
 const config = {
@@ -12,6 +12,7 @@ const config = {
   // distDir: 'folderBuild',
   images: {
     domains: [],
+    unoptimized: true,
     // loader: 'imgix',
     // path: '',
   },
@@ -32,17 +33,17 @@ const config = {
   //   }
   // },
   webpack: (config) => {
-    const newConfig = config
+    const newConfig = config;
 
     newConfig.resolve.alias = {
       ...config.resolve.alias,
-    }
+    };
     // new MomentTimezoneDataPlugin({
     //   matchZones: ['/Asia/Jakarta', 'Etc/UTC'],
     //   startYear: 2020,
     //   endYear: 9999,
     // })
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       newConfig.optimization.minimizer = [
         new TerserPlugin({
           terserOptions: {
@@ -51,20 +52,18 @@ const config = {
             },
           },
         }),
-      ]
+      ];
     }
 
-    return newConfig
+    return newConfig;
   },
   loaders: [
     {
       test: /plugin\.css$/,
-      loaders: ['style-loader', 'css'],
+      loaders: ["style-loader", "css"],
     },
   ],
-}
-
+};
 
 // module.exports = nextCompose([withFonts(), optimizedImages], config);
 module.exports = nextCompose([withFonts()], config);
-
