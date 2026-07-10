@@ -109,6 +109,7 @@
     "use-debounce": "^7.0.0"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.41.3",
     "@babel/core": "^7.14.6",
     "@babel/preset-typescript": "^7.14.5",
     "@moxy/next-common-files": "^1.5.1",

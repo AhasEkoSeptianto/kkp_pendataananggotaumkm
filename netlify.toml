@@ -2,5 +2,13 @@
   command = "yarn build"
   publish = ".next"
 
+[build.environment]
+  NODE_OPTIONS = "--openssl-legacy-provider"
+  # Next.js 11 needs an older Node runtime for the build (webpack5 + OpenSSL3 incompatibility)
+  NODE_VERSION = "16"
+
+# Next.js 11 is only supported by the LEGACY Next.js Runtime (v4).
+# The default/latest plugin version (v5, OpenNext-based) only supports Next.js 13.5+
+# and will silently break static asset serving on older apps like this one.
 [[plugins]]
   package = "@netlify/plugin-nextjs"
